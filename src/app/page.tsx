@@ -1,11 +1,15 @@
 "use client";
 import * as React from "react";
 import styles from "./page.module.css";
+import { Container } from "@mui/material";
+import Main from "./main/page";
 
 export default function Home() {
   return (
     <>
-      <main className={styles.main}>다크모드</main>
+      <Container>
+        <Main />
+      </Container>
     </>
   );
 }

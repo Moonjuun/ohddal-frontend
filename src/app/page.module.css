@@ -1,10 +1,26 @@
 .main {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  min-height: 70vh;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 65vh;
+  }
+  .leftsection {
+    margin-top: 15vh;
+    height: 20%;
+  }
+  .rightsection {
+    height: 30%;
+    margin-top: 65vh;
+  }
 }
 
 .description {
