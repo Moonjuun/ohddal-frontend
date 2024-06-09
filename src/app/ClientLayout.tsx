@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { PaletteMode, Grid } from "@mui/material";
+import Footer2 from "@/common/Footer2";
 import AppAppBar from "@/common/AppAppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -37,8 +38,18 @@ export default function ClientLayout({
       <Box sx={{ bgcolor: "background.default" }}>
         <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
         <Grid container className={styles.main}>
-          {children}
+          <Grid item maxWidth={"20%"} className={styles.leftsection}>
+            Left Section
+          </Grid>
+          <Grid item maxWidth={"60%"}>
+            {children}
+          </Grid>
+          <Grid item maxWidth={"20%"} className={styles.rightsection}>
+            Right Section
+          </Grid>
         </Grid>
+
+        <Footer2 />
       </Box>
     </ThemeProvider>
   );
