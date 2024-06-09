@@ -1,12 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { PaletteMode, Grid } from "@mui/material";
-import Footer2 from "@/common/Footer2";
 import AppAppBar from "@/common/AppAppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import styles from "./page.module.css";
+import Footer2 from "@/common/Footer2";
 
 export default function ClientLayout({
   children,
@@ -35,22 +34,11 @@ export default function ClientLayout({
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Box sx={{ bgcolor: "background.default" }}>
+      <Box sx={{ bgcolor: "background.default" }} minHeight={"50vh"}>
         <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-        <Grid container className={styles.main}>
-          <Grid item maxWidth={"20%"} className={styles.leftsection}>
-            Left Section
-          </Grid>
-          <Grid item maxWidth={"60%"}>
-            {children}
-          </Grid>
-          <Grid item maxWidth={"20%"} className={styles.rightsection}>
-            Right Section
-          </Grid>
-        </Grid>
-
-        <Footer2 />
+        <Grid container>{children}</Grid>
       </Box>
+      <Footer2 />
     </ThemeProvider>
   );
 }

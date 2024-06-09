@@ -33,7 +33,7 @@ function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
   };
 
   return (
-    <div>
+    <Container sx={{ mb: 15 }}>
       <AppBar
         position="fixed"
         sx={{
@@ -168,7 +168,7 @@ function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
           </Toolbar>
         </Container>
       </AppBar>
-    </div>
+    </Container>
   );
 }
 
