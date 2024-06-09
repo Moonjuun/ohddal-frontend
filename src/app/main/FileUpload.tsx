@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import { Container, Button, Alert } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-import Image from "next/image";
+import axios from "axios";
 import AutoHeightFileImage from "@/components/AutoHeightFileImage";
 import styles from "styled-components";
 
@@ -37,11 +37,29 @@ const FileUpload: React.FC = () => {
     event.preventDefault();
   };
 
-  const postFile = () => {
+  const postFile = async (file: any) => {
     if (!file) {
       setAlertFile(true);
+      return;
     }
-    console.log("file", file);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/postFile`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -79,7 +97,7 @@ const FileUpload: React.FC = () => {
             backgroundColor: "#3399FF",
           }}
           variant="contained"
-          onClick={postFile}
+          onClick={() => postFile(file)}
         >
           전송
         </Button>
@@ -157,7 +175,7 @@ const FileName = styled(Typography)({
 });
 
 const ImageWrapper = styled(Box)({
-  marginTop: "10px",
+  marginTop: "5px",
   border: "2px solid #ececec",
   borderRadius: "4px",
   padding: "10px",
