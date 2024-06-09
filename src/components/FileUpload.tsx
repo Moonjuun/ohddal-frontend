@@ -1,13 +1,14 @@
 import * as React from "react";
 import { useState, useRef } from "react";
 import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import { Container } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
+import Image from "next/image";
+import AutoHeightFileImage from "@/components/AutoHeightFileImage";
 
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -54,6 +55,11 @@ const FileUpload: React.FC = () => {
           <FileName variant="body1">{file?.name}</FileName>
         </Tooltip>
       </ResponsiveBox>
+      {file && (
+        <ImageWrapper>
+          <AutoHeightFileImage file={file} width={0} height={0} />
+        </ImageWrapper>
+      )}
     </ResponsiveContainer>
   );
 };
@@ -97,6 +103,7 @@ const ResponsiveContainer = styled(Container)({
 
 const ResponsiveBox = styled(Box)({
   display: "flex",
+  alignItems: "center",
   backgroundColor: "#ececec",
   padding: "10px",
   marginTop: "16px",
@@ -110,4 +117,8 @@ const FileName = styled(Typography)({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
+});
+
+const ImageWrapper = styled(Box)({
+  marginTop: "10px",
 });
