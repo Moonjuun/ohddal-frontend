@@ -13,6 +13,7 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import ToggleColorMode from "./ToggleColorMode";
 import Link from "next/link";
+import SettingsDrawer from "./SettingsDrawer"; // 추가된 부분
 
 const logoStyle = {
   width: "140px",
@@ -123,6 +124,7 @@ function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+              <SettingsDrawer /> {/* 추가된 부분 */}
             </Box>
             <Box sx={{ display: { sm: "", md: "none" } }}>
               <Button
