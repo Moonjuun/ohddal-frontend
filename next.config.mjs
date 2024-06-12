@@ -4,7 +4,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  generateBuildId: () => nextBuildId({ dir: __dirname, describe: true }),
   typescript: {
     ignoreBuildErrors: process.env.NEXT_PUBLIC_IGNORE_BUILD_ERRORS,
   },
