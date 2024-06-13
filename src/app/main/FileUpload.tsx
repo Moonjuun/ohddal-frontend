@@ -37,7 +37,7 @@ const FileUpload: React.FC = () => {
     event.preventDefault();
   };
 
-  const postFile = async (file: any) => {
+  const postFile = async (file: File | null) => {
     if (!file) {
       setAlertFile(true);
       return;
