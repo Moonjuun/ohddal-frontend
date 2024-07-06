@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { PaletteMode, Grid } from "@mui/material";
 import AppAppBar from "@/common/AppAppBar";
+import FullAppbar from "@/common/FullAppbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -35,7 +36,8 @@ export default function ClientLayout({
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Box sx={{ bgcolor: "background.default" }} minHeight={"50vh"}>
-        <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+        {/* <AppAppBar mode={mode} toggleColorMode={toggleColorMode} /> */}
+        <FullAppbar mode={mode} toggleColorMode={toggleColorMode} />
         <Grid container>{children}</Grid>
       </Box>
       <Footer2 />
