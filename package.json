@@ -21,7 +21,8 @@
     "react-dom": "^18",
     "react-share": "5.1.0",
     "react-spinners": "0.13.8",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "zustand": "4.5.4"
   },
   "devDependencies": {
     "@types/node": "^20",
