@@ -6,12 +6,13 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Box from '@mui/material/Box';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import FormatTextdirectionLToRIcon from '@mui/icons-material/FormatTextdirectionLToR';
 import FormatTextdirectionRToLIcon from '@mui/icons-material/FormatTextdirectionRToL';
 import { PaletteMode } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   display: 'flex',
@@ -34,6 +35,8 @@ const SettingsDrawer = ({
 }: ToggleColorModeProps) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchor, setAnchor] = React.useState<'left' | 'right'>('right');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const savedDirection = localStorage.getItem('drawerDirection') as 'left' | 'right' | null;
@@ -69,7 +72,7 @@ const SettingsDrawer = ({
         <SettingsIcon />
       </IconButton>
       <Drawer anchor={anchor} open={drawerOpen} onClose={toggleDrawer(false)}>
-        <Box sx={{ width: 350, padding: 2 }}>
+        <Box sx={{ width: isMobile ? 250 : 400, padding: 2 }}>
           <h2>Settings</h2>
           <Box>
             <StyledToggleButtonGroup color="primary" value={mode} exclusive aria-label="mode">
