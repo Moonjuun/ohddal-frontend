@@ -53,7 +53,6 @@ const FileUpload: React.FC = () => {
         return;
       }
       const result = await postFile(file);
-      console.log(result);
       setResult(result);
       router.push('/result');
     } catch (error) {

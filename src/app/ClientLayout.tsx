@@ -31,10 +31,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Box sx={{ bgcolor: 'background.default' }} minHeight={'50vh'}>
-        <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-        {/* <FullAppbar mode={mode} toggleColorMode={toggleColorMode} /> */}
-        <Grid container>{children}</Grid>
+      <Box sx={{ bgcolor: 'background.default' }} minHeight={'70vh'}>
+        {/* <AppAppBar mode={mode} toggleColorMode={toggleColorMode} /> */}
+        <FullAppbar mode={mode} toggleColorMode={toggleColorMode} />
+        <Grid container sx={{ mt: 10 }}>
+          {children}
+        </Grid>
       </Box>
       <Footer2 />
     </ThemeProvider>
