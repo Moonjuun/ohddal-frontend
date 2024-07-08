@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import Image from 'next/image';
 
 import ToggleColorModeFullAppbar from './ToggleColorModeFullAppbar';
 import SettingsDrawer from './SettingsDrawer';
@@ -58,7 +59,6 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
             maxHeight: 40,
           })}
         >
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -74,7 +74,7 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
               textDecoration: 'none',
             }}
           >
-            LOGO
+            {/* LOGO */}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -113,7 +113,16 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Image
+            src={'/images/wiwi.png'}
+            alt="logo of sitemark"
+            width={100}
+            height={50}
+            onClick={() => {
+              window.location.href = '/';
+            }}
+            style={{ marginRight: '20px' }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -130,7 +139,7 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
               textDecoration: 'none',
             }}
           >
-            LOGO
+            {/* LOGO */}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
