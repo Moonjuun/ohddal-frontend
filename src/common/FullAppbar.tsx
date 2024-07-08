@@ -19,12 +19,14 @@ import SettingsDrawer from './SettingsDrawer';
 interface AppAppBarProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
+  toggleColorLight: () => void;
+  toggleColorDark: () => void;
 }
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function FullAppbar({ mode, toggleColorMode }: AppAppBarProps) {
+function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }: AppAppBarProps) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -171,9 +173,13 @@ function FullAppbar({ mode, toggleColorMode }: AppAppBarProps) {
               ))}
             </Menu>
           </Box>
-          <ToggleColorModeFullAppbar mode={mode} toggleColorMode={toggleColorMode} />
-
-          {/* <SettingsDrawer /> */}
+          {/* <ToggleColorModeFullAppbar mode={mode} toggleColorMode={toggleColorMode} /> */}
+          <SettingsDrawer
+            mode={mode}
+            toggleColorMode={toggleColorMode}
+            toggleColorLight={toggleColorLight}
+            toggleColorDark={toggleColorDark}
+          />
         </Toolbar>
       </Container>
     </AppBar>

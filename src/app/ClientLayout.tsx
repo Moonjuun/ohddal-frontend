@@ -20,6 +20,16 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     localStorage.setItem('colorMode', newMode);
   };
 
+  const toggleColorLight = () => {
+    setMode('light');
+    localStorage.setItem('colorMode', 'light');
+  };
+
+  const toggleColorDark = () => {
+    setMode('dark');
+    localStorage.setItem('colorMode', 'dark');
+  };
+
   useEffect(() => {
     // 로컬 스토리지에서 이전에 선택한 모드 불러오기
     const savedMode = localStorage.getItem('colorMode');
@@ -33,7 +43,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <CssBaseline />
       <Box sx={{ bgcolor: 'background.default' }} minHeight={'70vh'}>
         {/* <AppAppBar mode={mode} toggleColorMode={toggleColorMode} /> */}
-        <FullAppbar mode={mode} toggleColorMode={toggleColorMode} />
+        <FullAppbar
+          mode={mode}
+          toggleColorMode={toggleColorMode}
+          toggleColorLight={toggleColorLight}
+          toggleColorDark={toggleColorDark}
+        />
         <Grid container sx={{ mt: 10 }}>
           {children}
         </Grid>
