@@ -1,15 +1,14 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { styled } from '@mui/material/styles';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
 import FormatTextdirectionLToRIcon from '@mui/icons-material/FormatTextdirectionLToR';
 import FormatTextdirectionRToLIcon from '@mui/icons-material/FormatTextdirectionRToL';
 import { PaletteMode } from '@mui/material';
@@ -36,6 +35,13 @@ const SettingsDrawer = ({
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchor, setAnchor] = React.useState<'left' | 'right'>('right');
 
+  useEffect(() => {
+    const savedDirection = localStorage.getItem('drawerDirection') as 'left' | 'right' | null;
+    if (savedDirection) {
+      setAnchor(savedDirection);
+    }
+  }, []);
+
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === 'keydown' &&
@@ -53,6 +59,7 @@ const SettingsDrawer = ({
   ) => {
     if (newDirection !== null) {
       setAnchor(newDirection);
+      localStorage.setItem('drawerDirection', newDirection);
     }
   };
 
@@ -70,10 +77,6 @@ const SettingsDrawer = ({
                 <LightModeIcon />
                 Light
               </ToggleButton>
-              {/* <ToggleButton value="system" aria-label="system">
-                <SettingsSystemDaydreamIcon />
-                System
-              </ToggleButton> */}
               <ToggleButton value="dark" aria-label="dark" onChange={toggleColorDark}>
                 <DarkModeIcon />
                 Dark
@@ -98,9 +101,6 @@ const SettingsDrawer = ({
               </ToggleButton>
             </StyledToggleButtonGroup>
           </Box>
-          {/* <Button variant="outlined" sx={{ width: '100%', mt: 2 }}>
-            Edit documentation colors
-          </Button> */}
         </Box>
       </Drawer>
     </div>
