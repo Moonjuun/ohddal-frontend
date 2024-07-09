@@ -121,7 +121,7 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
             onClick={() => {
               window.location.href = '/';
             }}
-            style={{ marginRight: '20px' }}
+            style={{ marginRight: '20px', marginLeft: '30px' }}
           />
           <Typography
             variant="h5"

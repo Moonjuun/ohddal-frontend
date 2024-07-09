@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import AutoHeightFileImage from '@/components/AutoHeightFileImage';
 import styles from 'styled-components';
 import { useRouter } from 'next/navigation';
+import Loading from '@/common/Loading';
 
 // store
 import useResultStore from '@/store/useResultStore';
@@ -21,9 +22,11 @@ import { postFile } from '@/api/fileUpload';
 
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [alertFile, setAlertFile] = useState<Boolean>(false);
+  const [alertFile, setAlertFile] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const setResult = useResultStore((state) => state.setResult);
+
   const router = useRouter();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,53 +55,65 @@ const FileUpload: React.FC = () => {
         setAlertFile(true);
         return;
       }
+
+      setIsLoading(true);
       const result = await postFile(file);
       setResult(result);
       router.push('/result');
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
     }
   };
 
   return (
     <ResponsiveContainer>
-      <DropZone
-        onClick={() => inputRef.current?.click()}
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-      >
-        <CloudUploadIcon style={{ fontSize: 50, color: '#3f51b5' }} />
-        <Typography variant="body1">Files to upload</Typography>
-        <VisuallyHiddenInput type="file" onChange={handleFileChange} ref={inputRef} />
-      </DropZone>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <DropZone
+            onClick={() => inputRef.current?.click()}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+          >
+            <CloudUploadIcon style={{ fontSize: 50, color: '#3f51b5' }} />
+            <Typography variant="body1">Files to upload</Typography>
+            <VisuallyHiddenInput type="file" onChange={handleFileChange} ref={inputRef} />
+          </DropZone>
 
-      <ButtonWrapper>
-        <ResponsiveBoxWrapper>
-          <ResponsiveBox>
-            <InsertDriveFileIcon style={{ marginRight: 8 }} />
-            <Tooltip title={file?.name}>
-              <FileName variant="body1">{file?.name}</FileName>
-            </Tooltip>
-          </ResponsiveBox>
-          <AlertBox>{alertFile && <Alert severity="error">파일을 올려주세요</Alert>}</AlertBox>
-        </ResponsiveBoxWrapper>
+          <ButtonWrapper>
+            <ResponsiveBoxWrapper>
+              <ResponsiveBox>
+                <InsertDriveFileIcon style={{ marginRight: 8 }} />
+                <Tooltip title={file?.name}>
+                  <FileName variant="body1">{file?.name}</FileName>
+                </Tooltip>
+              </ResponsiveBox>
+              <AlertBox>{alertFile && <Alert severity="error">파일을 올려주세요</Alert>}</AlertBox>
+            </ResponsiveBoxWrapper>
 
-        <Button
-          sx={{ mb: 4 }}
-          style={{
-            backgroundColor: '#3399FF',
-          }}
-          variant="contained"
-          onClick={handlePostFile}
-        >
-          전송
-        </Button>
-      </ButtonWrapper>
+            <Button
+              sx={{ mb: 4 }}
+              style={{
+                backgroundColor: '#3399FF',
+              }}
+              variant="contained"
+              onClick={handlePostFile}
+            >
+              전송
+            </Button>
+          </ButtonWrapper>
 
-      {file && (
-        <ImageWrapper>
-          <AutoHeightFileImage file={file} width={0} height={0} />
-        </ImageWrapper>
+          {file && (
+            <ImageWrapper>
+              <AutoHeightFileImage file={file} width={0} height={0} />
+            </ImageWrapper>
+          )}
+        </>
       )}
     </ResponsiveContainer>
   );
