@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 import Loading from '@/common/Loading';
 
 // store
-import useResultStore from '@/store/useResultStore';
+import useResultStore, { ResultData } from '@/store/useResultStore';
 
 // api
 import { postFile } from '@/api/fileUpload';
@@ -58,7 +58,13 @@ const FileUpload: React.FC = () => {
 
       setIsLoading(true);
       const result = await postFile(file);
-      setResult(result);
+      const formattedResult: ResultData = {
+        bestGuess: result.bestGuess || [],
+        result: result.result || [],
+        scoreNoneZeroResult: result.scoreNoneZeroResult || [],
+        scoreZeroResult: result.scoreZeroResult || [],
+      };
+      setResult(formattedResult);
       router.push('/result');
       setTimeout(() => {
         setIsLoading(false);
