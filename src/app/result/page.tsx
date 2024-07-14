@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import useResultStore from '@/store/useResultStore';
 import Image from 'next/image';
+import BubbleComponent from './BubbleComponent';
 
 interface ImageData {
   url: string;
@@ -113,6 +114,7 @@ const Result = () => {
         position: 'relative',
       }}
     >
+      <BubbleComponent data={result.scoreNoneZeroResult} />
       <CoverFlowContainer>
         <NavigationButton onClick={handlePrev} disabled={currentIndex === 0} sx={{ left: 0 }}>
           Previous
