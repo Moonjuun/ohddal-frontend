@@ -11,7 +11,7 @@ interface EntityData {
 interface BubbleComponentProps {
   data: EntityData[];
 }
-
+// https://www.google.com/search?kgmid=
 const renderActiveShape = (props: any) => {
   const {
     cx,
@@ -40,7 +40,7 @@ const renderActiveShape = (props: any) => {
   return (
     <g>
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        {payload.entityId}
+        {payload.description}
       </text>
       <Sector
         cx={cx}
@@ -67,7 +67,7 @@ const renderActiveShape = (props: any) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`Score: ${value}`}</text>
+      >{`Score: ${value.toFixed(2)}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
         {`(${(percent * 100).toFixed(2)}%)`}
       </text>
@@ -98,7 +98,7 @@ const BubbleComponent: React.FC<BubbleComponentProps> = ({ data }) => {
           onMouseEnter={onPieEnter}
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={index === activeIndex ? '#82ca9d' : '#8884d8'} />
+            <Cell key={`cell-${index}`} fill={index === activeIndex ? '#033363' : '#9CCCFC'} />
           ))}
         </Pie>
       </PieChart>
