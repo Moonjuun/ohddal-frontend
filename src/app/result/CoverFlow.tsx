@@ -1,0 +1,134 @@
+'use client';
+import * as React from 'react';
+import { useState } from 'react';
+import { Button, Typography } from '@mui/material';
+import styled from 'styled-components';
+import Image from 'next/image';
+
+interface ImageData {
+  url: string;
+  score: number;
+}
+
+interface CoverFlowProps {
+  images: ImageData[];
+}
+
+const CoverFlowContainerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  height: 400px;
+  margin: 20px 0;
+  width: 100%;
+`;
+
+const CoverFlowInner = styled.div`
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  height: 300px;
+  transform-style: preserve-3d;
+
+  @media (max-width: 600px) {
+    width: 10%;
+    height: 200px;
+  }
+`;
+
+interface CoverFlowItemProps {
+  $index: number;
+  $currentIndex: number;
+}
+
+const CoverFlowItem = styled.div<CoverFlowItemProps>`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  margin-left: -150px;
+  transition: all 0.5s ease;
+  transform: ${({ $index, $currentIndex }) => {
+    const offset = $index - $currentIndex;
+    const rotateY = offset * 30;
+    const translateX = offset * 120;
+    const translateZ = -Math.abs(offset) * 200;
+
+    return `
+      translateX(${translateX}px)
+      translateZ(${translateZ}px)
+      rotateY(${rotateY}deg)
+    `;
+  }};
+  z-index: ${({ $index, $currentIndex }) => 100 - Math.abs($index - $currentIndex)};
+  opacity: ${({ $index, $currentIndex }) => ($index === $currentIndex ? 1 : 0.7)};
+  box-shadow: ${({ $index, $currentIndex }) =>
+    $index === $currentIndex ? '0 0 15px rgba(0, 0, 0, 0.5)' : 'none'};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 600px) {
+    width: 200px;
+    height: 200px;
+    margin-left: -100px;
+  }
+`;
+
+const NavigationButton = styled(Button)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 101; /* Make sure buttons are always on top */
+  @media (max-width: 600px) {
+    top: 40%;
+  }
+`;
+
+const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, images.length - 1));
+  };
+
+  return (
+    <>
+      <CoverFlowContainerWrapper>
+        <NavigationButton onClick={handlePrev} disabled={currentIndex === 0} sx={{ left: 0 }}>
+          Previous
+        </NavigationButton>
+        <CoverFlowInner>
+          {images.map((image, index) => (
+            <CoverFlowItem key={index} $index={index} $currentIndex={currentIndex}>
+              <img src={image.url} alt={`Cover ${index}`} />
+            </CoverFlowItem>
+          ))}
+        </CoverFlowInner>
+        <NavigationButton
+          onClick={handleNext}
+          disabled={currentIndex === images.length - 1}
+          sx={{ right: 0 }}
+        >
+          Next
+        </NavigationButton>
+      </CoverFlowContainerWrapper>
+      {images[currentIndex] && (
+        <Typography variant="h6" component="div" sx={{ marginTop: 2 }}>
+          {images[currentIndex].url}
+        </Typography>
+      )}
+    </>
+  );
+};
+
+export default CoverFlow;
