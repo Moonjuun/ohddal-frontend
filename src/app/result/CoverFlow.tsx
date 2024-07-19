@@ -1,9 +1,9 @@
 'use client';
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, Container } from '@mui/material';
 import styled from 'styled-components';
-import Image from 'next/image';
+import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
 interface ImageData {
   url: string;
@@ -14,6 +14,16 @@ interface CoverFlowProps {
   images: ImageData[];
 }
 
+const ResponsiveContainer = styled(Container)`
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  overflow: hidden;
+`;
+
 const CoverFlowContainerWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -22,17 +32,19 @@ const CoverFlowContainerWrapper = styled.div`
   height: 400px;
   margin: 20px 0;
   width: 100%;
+  overflow: hidden;
 `;
 
 const CoverFlowInner = styled.div`
   position: relative;
-  width: 80%;
+  width: 100%;
   max-width: 600px;
   height: 300px;
   transform-style: preserve-3d;
+  overflow: hidden;
 
   @media (max-width: 600px) {
-    width: 10%;
+    width: 100%;
     height: 200px;
   }
 `;
@@ -44,11 +56,12 @@ interface CoverFlowItemProps {
 
 const CoverFlowItem = styled.div<CoverFlowItemProps>`
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  width: 300px;
-  height: 300px;
-  margin-left: -150px;
+  width: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '350px' : '250px')};
+  height: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '350px' : '250px')};
+  margin-left: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-200px' : '-150px')};
+  margin-top: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-200px' : '-150px')};
   transition: all 0.5s ease;
   transform: ${({ $index, $currentIndex }) => {
     const offset = $index - $currentIndex;
@@ -62,10 +75,11 @@ const CoverFlowItem = styled.div<CoverFlowItemProps>`
       rotateY(${rotateY}deg)
     `;
   }};
+  background-color: white;
   z-index: ${({ $index, $currentIndex }) => 100 - Math.abs($index - $currentIndex)};
   opacity: ${({ $index, $currentIndex }) => ($index === $currentIndex ? 1 : 0.7)};
   box-shadow: ${({ $index, $currentIndex }) =>
-    $index === $currentIndex ? '0 0 15px rgba(0, 0, 0, 0.5)' : 'none'};
+    $index === $currentIndex ? '0 0 20px rgba(0, 0, 0, 0.7)' : 'none'};
 
   img {
     width: 100%;
@@ -74,9 +88,10 @@ const CoverFlowItem = styled.div<CoverFlowItemProps>`
   }
 
   @media (max-width: 600px) {
-    width: 200px;
-    height: 200px;
-    margin-left: -100px;
+    width: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '300px' : '200px')};
+    height: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '300px' : '200px')};
+    margin-left: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-150px' : '-100px')};
+    margin-top: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-150px' : '-100px')};
   }
 `;
 
@@ -84,7 +99,7 @@ const NavigationButton = styled(Button)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 101; /* Make sure buttons are always on top */
+  z-index: 101;
   @media (max-width: 600px) {
     top: 40%;
   }
@@ -92,6 +107,7 @@ const NavigationButton = styled(Button)`
 
 const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const fallbackImage = '/images/go-to-url.png';
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -102,7 +118,7 @@ const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
   };
 
   return (
-    <>
+    <ResponsiveContainer>
       <CoverFlowContainerWrapper>
         <NavigationButton onClick={handlePrev} disabled={currentIndex === 0} sx={{ left: 0 }}>
           Previous
@@ -110,7 +126,13 @@ const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
         <CoverFlowInner>
           {images.map((image, index) => (
             <CoverFlowItem key={index} $index={index} $currentIndex={currentIndex}>
-              <img src={image.url} alt={`Cover ${index}`} />
+              <a href={image.url} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={image.url}
+                  alt={`Cover ${index}`}
+                  onError={(e) => (e.currentTarget.src = fallbackImage)}
+                />
+              </a>
             </CoverFlowItem>
           ))}
         </CoverFlowInner>
@@ -122,12 +144,7 @@ const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
           Next
         </NavigationButton>
       </CoverFlowContainerWrapper>
-      {images[currentIndex] && (
-        <Typography variant="h6" component="div" sx={{ marginTop: 2 }}>
-          {images[currentIndex].url}
-        </Typography>
-      )}
-    </>
+    </ResponsiveContainer>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import styled from 'styled-components';
 
 interface EntityData {
   entityId: string;
