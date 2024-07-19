@@ -5,7 +5,7 @@ import { Container } from '@mui/material';
 import styled from 'styled-components';
 
 import useResultStore from '@/store/useResultStore';
-import BubbleComponent from './BubbleComponent';
+import BubbleComponent from './PieChart';
 import CoverFlowContainer from './CoverFlow';
 
 const Result = () => {
