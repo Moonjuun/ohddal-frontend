@@ -82,7 +82,7 @@ const CoverFlowInner = styled.div`
   position: relative;
   width: 100%;
   max-width: 600px;
-  height: 300px;
+  height: 400px;
   transform-style: preserve-3d;
   overflow: hidden;
 
@@ -106,6 +106,7 @@ const CoverFlowItem = styled.div<CoverFlowItemProps>`
   margin-left: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-175px' : '-125px')};
   margin-top: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-175px' : '-125px')};
   transition: all 0.5s ease;
+  border-radius: 15px;
   transform: ${({ $index, $currentIndex }) => {
     const offset = $index - $currentIndex;
     const rotateY = offset * 30;
@@ -136,6 +137,7 @@ const StyledImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 15px;
 `;
 
 const NavigationButtonsContainer = styled.div`
