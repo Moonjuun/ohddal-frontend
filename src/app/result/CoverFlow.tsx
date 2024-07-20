@@ -5,6 +5,7 @@ import { Button, Typography, Container } from '@mui/material';
 import styled from 'styled-components';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
 interface ImageData {
   url: string;
   score: number;
@@ -29,9 +30,6 @@ const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
   return (
     <ResponsiveContainer>
       <CoverFlowContainerWrapper>
-        <NavigationButton onClick={handlePrev} disabled={currentIndex === 0} sx={{ left: 0 }}>
-          <ArrowBackIosIcon />
-        </NavigationButton>
         <CoverFlowInner>
           {images.map((image, index) => (
             <CoverFlowItem key={index} $index={index} $currentIndex={currentIndex}>
@@ -45,13 +43,14 @@ const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
             </CoverFlowItem>
           ))}
         </CoverFlowInner>
-        <NavigationButton
-          onClick={handleNext}
-          disabled={currentIndex === images.length - 1}
-          sx={{ right: 0 }}
-        >
-          <ArrowForwardIosIcon />
-        </NavigationButton>
+        <NavigationButtonsContainer>
+          <NavigationButton onClick={handlePrev} disabled={currentIndex === 0}>
+            <ArrowBackIosIcon />
+          </NavigationButton>
+          <NavigationButton onClick={handleNext} disabled={currentIndex === images.length - 1}>
+            <ArrowForwardIosIcon />
+          </NavigationButton>
+        </NavigationButtonsContainer>
       </CoverFlowContainerWrapper>
     </ResponsiveContainer>
   );
@@ -71,10 +70,11 @@ const ResponsiveContainer = styled(Container)`
 
 const CoverFlowContainerWrapper = styled.div`
   display: flex;
+  flex-direction: column; /* Change to column to stack the inner content and navigation buttons */
   align-items: center;
   justify-content: center;
   perspective: 1000px;
-  height: 400px;
+  // height: 400px;
   margin: 20px 0;
   width: 100%;
   overflow: hidden;
@@ -140,12 +140,15 @@ const CoverFlowItem = styled.div<CoverFlowItemProps>`
   }
 `;
 
+const NavigationButtonsContainer = styled.div`
+  display: flex;
+  gap: 10px; /* Adjust space between buttons */
+  margin-top: 20px; /* Space between CoverFlowInner and buttons */
+`;
+
 const NavigationButton = styled(Button)`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 101;
   @media (max-width: 600px) {
-    top: 40%;
+    font-size: 14px; /* Adjust button size for smaller screens if needed */
   }
 `;
