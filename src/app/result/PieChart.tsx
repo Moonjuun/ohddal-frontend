@@ -39,8 +39,21 @@ const renderActiveShape = (props: any) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+      <text
+        x={cx}
+        y={cy - 20}
+        dy={8}
+        textAnchor="middle"
+        fill={fill}
+        style={{ fontWeight: 'bold', fontSize: '18px' }}
+      >
         {payload.description}
+      </text>
+      <text x={cx} y={cy + 8} textAnchor="middle" fill="#333">
+        {`Score: ${value.toFixed(2)}`}
+      </text>
+      <text x={cx} y={cy + 28} textAnchor="middle" fill="#999">
+        {`(${(percent * 100).toFixed(2)}%)`}
       </text>
       <Sector
         cx={cx}
@@ -60,7 +73,7 @@ const renderActiveShape = (props: any) => {
         outerRadius={outerRadius + 10}
         fill={fill}
       />
-      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+      {/* <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
@@ -70,7 +83,7 @@ const renderActiveShape = (props: any) => {
       >{`Score: ${value.toFixed(2)}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
         {`(${(percent * 100).toFixed(2)}%)`}
-      </text>
+      </text> */}
     </g>
   );
 };
