@@ -2,18 +2,25 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { Box, Container } from '@mui/material';
-import useResultStore from '@/store/useResultStore';
 import BubbleComponent from './PieChart';
 import CoverFlowContainer from './CoverFlow';
 import Image from 'next/image';
 import AutoHeightFileImage from '@/components/AutoHeightFileImage';
 import styled from 'styled-components';
+// store
+import useResultStore from '@/store/useResultStore';
+
+//effect
+import { confettiEffect } from '@/effect/confetti';
+import { ConfettiCustomShapesEffect } from '@/effect/CustomShape';
 
 const Result = () => {
   const result = useResultStore((state) => state?.result);
 
   useEffect(() => {
     console.log('resultresult', result);
+    confettiEffect();
+    ConfettiCustomShapesEffect();
   }, [result]);
 
   return (
