@@ -49,7 +49,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           toggleColorLight={toggleColorLight}
           toggleColorDark={toggleColorDark}
         />
-        <Grid container sx={{ mt: 10 }}>
+        <Grid container sx={{ mt: 3 }}>
           {children}
         </Grid>
       </Box>
