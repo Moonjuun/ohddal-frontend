@@ -14,7 +14,7 @@ import AutoHeightFileImage from '@/components/AutoHeightFileImage';
 import SearchIcon from '@mui/icons-material/Search';
 import PhotoIcon from '@mui/icons-material/Photo';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
-
+import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
 // store
 import useResultStore from '@/store/useResultStore';
 
@@ -67,7 +67,13 @@ const Result = () => {
 
       {result.scoreNoneZeroResult.length === 0 ? (
         <>
-          <Box sx={{ width: '100%', maxWidth: '400px', mt: 5 }}>
+          <Box sx={{ width: '100%', maxWidth: '400px' }}>
+            <AlignCenterBox>
+              <SentimentDissatisfiedIcon fontSize="large" />
+              <BoldText>
+                <TextTypingAnimation text={'No daata..'} />
+              </BoldText>
+            </AlignCenterBox>
             <Image
               src={'/images/no-data-cat1.png'}
               alt="No data available"
