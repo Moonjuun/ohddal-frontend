@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, Typography, Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import styled from 'styled-components';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -17,7 +17,6 @@ interface CoverFlowProps {
 
 const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const fallbackImage = '/images/go-to-url.png';
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -34,10 +33,10 @@ const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
           {images.map((image, index) => (
             <CoverFlowItem key={index} $index={index} $currentIndex={currentIndex}>
               <a href={image.url} target="_blank" rel="noopener noreferrer">
-                <img
+                <StyledImage
                   src={image.url}
                   alt={`Cover ${index}`}
-                  onError={(e) => (e.currentTarget.src = fallbackImage)}
+                  onError={(e) => (e.currentTarget.src = '/images/go-to-url.png')}
                 />
               </a>
             </CoverFlowItem>
@@ -70,11 +69,10 @@ const ResponsiveContainer = styled(Container)`
 
 const CoverFlowContainerWrapper = styled.div`
   display: flex;
-  flex-direction: column; /* Change to column to stack the inner content and navigation buttons */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   perspective: 1000px;
-  // height: 400px;
   margin: 20px 0;
   width: 100%;
   overflow: hidden;
@@ -90,7 +88,7 @@ const CoverFlowInner = styled.div`
 
   @media (max-width: 600px) {
     width: 100%;
-    height: 200px;
+    // height: 300px; // Adjust height for mobile if needed
   }
 `;
 
@@ -105,8 +103,8 @@ const CoverFlowItem = styled.div<CoverFlowItemProps>`
   left: 50%;
   width: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '350px' : '250px')};
   height: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '350px' : '250px')};
-  margin-left: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-200px' : '-150px')};
-  margin-top: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-200px' : '-150px')};
+  margin-left: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-175px' : '-125px')};
+  margin-top: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-175px' : '-125px')};
   transition: all 0.5s ease;
   transform: ${({ $index, $currentIndex }) => {
     const offset = $index - $currentIndex;
@@ -126,29 +124,29 @@ const CoverFlowItem = styled.div<CoverFlowItemProps>`
   box-shadow: ${({ $index, $currentIndex }) =>
     $index === $currentIndex ? '0 0 20px rgba(0, 0, 0, 0.7)' : 'none'};
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   @media (max-width: 600px) {
-    width: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '300px' : '200px')};
-    height: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '300px' : '200px')};
-    margin-left: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-150px' : '-100px')};
-    margin-top: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-150px' : '-100px')};
+    width: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '250px' : '150px')};
+    height: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '250px' : '150px')};
+    margin-left: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-120px' : '-65px')};
+    margin-top: ${({ $index, $currentIndex }) => ($index === $currentIndex ? '-120px' : '-65px')};
   }
+`;
+
+const StyledImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const NavigationButtonsContainer = styled.div`
   display: flex;
-  gap: 10px; /* Adjust space between buttons */
-  margin-top: 20px; /* Space between CoverFlowInner and buttons */
+  gap: 10px;
+  margin-top: 20px;
 `;
 
 const NavigationButton = styled(Button)`
   z-index: 101;
   @media (max-width: 600px) {
-    font-size: 14px; /* Adjust button size for smaller screens if needed */
+    font-size: 14px;
   }
 `;
