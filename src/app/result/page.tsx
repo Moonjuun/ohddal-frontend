@@ -5,10 +5,16 @@ import { Box, Container, Tooltip, Typography } from '@mui/material';
 import BubbleComponent from './PieChart';
 import CoverFlowContainer from './CoverFlow';
 import Image from 'next/image';
-import AutoHeightFileImage from '@/components/AutoHeightFileImage';
-import SearchIcon from '@mui/icons-material/Search';
+
 import styled from 'styled-components';
 import Divider from '@/common/Divider';
+
+//icon
+import AutoHeightFileImage from '@/components/AutoHeightFileImage';
+import SearchIcon from '@mui/icons-material/Search';
+import PhotoIcon from '@mui/icons-material/Photo';
+import DonutLargeIcon from '@mui/icons-material/DonutLarge';
+
 // store
 import useResultStore from '@/store/useResultStore';
 
@@ -53,13 +59,11 @@ const Result = () => {
 
       {result.file && (
         <Box sx={{ width: '100%', maxWidth: '400px' }}>
-          <Tooltip title={result.bestGuess[0]?.label}>
-            <AutoHeightFileImage file={result.file} width={0} height={0} />
-          </Tooltip>
+          <AutoHeightFileImage file={result.file} width={0} height={0} />
         </Box>
       )}
 
-      <Divider direction="horizontal" thickness="3px" color="#ececec" length="100%" />
+      <Divider direction="horizontal" thickness="3px" color="#ececec" length="80%" />
 
       {result.scoreNoneZeroResult.length === 0 ? (
         <>
@@ -72,15 +76,28 @@ const Result = () => {
               height={300}
             />
           </Box>
-          <Divider direction="horizontal" thickness="3px" color="#ececec" length="100%" />
+          <Divider direction="horizontal" thickness="3px" color="#ececec" length="80%" />
         </>
       ) : (
         <>
+          <AlignCenterBox>
+            <DonutLargeIcon fontSize="large" />
+            <BoldText>
+              <TextTypingAnimation text="Score" />
+            </BoldText>
+          </AlignCenterBox>
           <BubbleComponent data={result.scoreNoneZeroResult} />
-          <Divider direction="horizontal" thickness="3px" color="#ececec" length="100%" />
+          <Divider direction="horizontal" thickness="3px" color="#ececec" length="80%" />
         </>
       )}
 
+      <AlignCenterBox>
+        <PhotoIcon fontSize="large" />
+        <BoldText>
+          {' '}
+          <TextTypingAnimation text="Other Pic." />
+        </BoldText>
+      </AlignCenterBox>
       <CoverFlowContainer images={result.scoreZeroResult} />
     </Container>
   );
