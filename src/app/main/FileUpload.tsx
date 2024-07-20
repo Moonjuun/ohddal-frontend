@@ -63,6 +63,7 @@ const FileUpload: React.FC = () => {
         result: result.result || [],
         scoreNoneZeroResult: result.scoreNoneZeroResult || [],
         scoreZeroResult: result.scoreZeroResult || [],
+        file: file,
       };
       setResult(formattedResult);
       router.push('/result');

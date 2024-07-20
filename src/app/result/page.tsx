@@ -6,6 +6,8 @@ import useResultStore from '@/store/useResultStore';
 import BubbleComponent from './PieChart';
 import CoverFlowContainer from './CoverFlow';
 import Image from 'next/image';
+import AutoHeightFileImage from '@/components/AutoHeightFileImage';
+import styled from 'styled-components';
 
 const Result = () => {
   const result = useResultStore((state) => state?.result);
@@ -31,6 +33,13 @@ const Result = () => {
           height={200}
         />
       </Box>
+
+      {result.file && (
+        <Box sx={{ width: '100%', maxWidth: '400px' }}>
+          <AutoHeightFileImage file={result.file} width={0} height={0} />
+          {result.bestGuess[0]?.label}
+        </Box>
+      )}
 
       {result.scoreNoneZeroResult.length === 0 ? (
         <Box sx={{ width: '100%', maxWidth: '400px' }}>

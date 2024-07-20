@@ -5,6 +5,7 @@ export interface ResultData {
   result: any[];
   scoreNoneZeroResult: any[];
   scoreZeroResult: any[];
+  file?: File | null;
 }
 
 interface ResultState {
@@ -18,6 +19,7 @@ const useResultStore = create<ResultState>((set) => ({
     result: [],
     scoreNoneZeroResult: [],
     scoreZeroResult: [],
+    file: null,
   },
   setResult: (result) => set({ result }),
 }));
