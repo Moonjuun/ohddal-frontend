@@ -14,6 +14,51 @@ interface CoverFlowProps {
   images: ImageData[];
 }
 
+const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const fallbackImage = '/images/go-to-url.png';
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, images.length - 1));
+  };
+
+  return (
+    <ResponsiveContainer>
+      <CoverFlowContainerWrapper>
+        <NavigationButton onClick={handlePrev} disabled={currentIndex === 0} sx={{ left: 0 }}>
+          <ArrowBackIosIcon />
+        </NavigationButton>
+        <CoverFlowInner>
+          {images.map((image, index) => (
+            <CoverFlowItem key={index} $index={index} $currentIndex={currentIndex}>
+              <a href={image.url} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={image.url}
+                  alt={`Cover ${index}`}
+                  onError={(e) => (e.currentTarget.src = fallbackImage)}
+                />
+              </a>
+            </CoverFlowItem>
+          ))}
+        </CoverFlowInner>
+        <NavigationButton
+          onClick={handleNext}
+          disabled={currentIndex === images.length - 1}
+          sx={{ right: 0 }}
+        >
+          <ArrowForwardIosIcon />
+        </NavigationButton>
+      </CoverFlowContainerWrapper>
+    </ResponsiveContainer>
+  );
+};
+
+export default CoverFlow;
+
 const ResponsiveContainer = styled(Container)`
   width: 100%;
   max-width: 100%;
@@ -104,48 +149,3 @@ const NavigationButton = styled(Button)`
     top: 40%;
   }
 `;
-
-const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const fallbackImage = '/images/go-to-url.png';
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, images.length - 1));
-  };
-
-  return (
-    <ResponsiveContainer>
-      <CoverFlowContainerWrapper>
-        <NavigationButton onClick={handlePrev} disabled={currentIndex === 0} sx={{ left: 0 }}>
-          <ArrowBackIosIcon />
-        </NavigationButton>
-        <CoverFlowInner>
-          {images.map((image, index) => (
-            <CoverFlowItem key={index} $index={index} $currentIndex={currentIndex}>
-              <a href={image.url} target="_blank" rel="noopener noreferrer">
-                <img
-                  src={image.url}
-                  alt={`Cover ${index}`}
-                  onError={(e) => (e.currentTarget.src = fallbackImage)}
-                />
-              </a>
-            </CoverFlowItem>
-          ))}
-        </CoverFlowInner>
-        <NavigationButton
-          onClick={handleNext}
-          disabled={currentIndex === images.length - 1}
-          sx={{ right: 0 }}
-        >
-          <ArrowForwardIosIcon />
-        </NavigationButton>
-      </CoverFlowContainerWrapper>
-    </ResponsiveContainer>
-  );
-};
-
-export default CoverFlow;
