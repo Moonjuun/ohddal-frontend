@@ -3,8 +3,8 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Button, Typography, Container } from '@mui/material';
 import styled from 'styled-components';
-import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 interface ImageData {
   url: string;
   score: number;
@@ -121,7 +121,7 @@ const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
     <ResponsiveContainer>
       <CoverFlowContainerWrapper>
         <NavigationButton onClick={handlePrev} disabled={currentIndex === 0} sx={{ left: 0 }}>
-          Previous
+          <ArrowBackIosIcon />
         </NavigationButton>
         <CoverFlowInner>
           {images.map((image, index) => (
@@ -141,7 +141,7 @@ const CoverFlow: React.FC<CoverFlowProps> = ({ images }) => {
           disabled={currentIndex === images.length - 1}
           sx={{ right: 0 }}
         >
-          Next
+          <ArrowForwardIosIcon />
         </NavigationButton>
       </CoverFlowContainerWrapper>
     </ResponsiveContainer>
