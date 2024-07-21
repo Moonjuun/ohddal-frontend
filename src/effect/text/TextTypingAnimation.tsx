@@ -21,7 +21,7 @@ const TextTypingAnimation = ({ text }: AnimationProps) => {
         return;
       }
 
-      if (textCount >= text.length) {
+      if (textCount >= text?.length) {
         //text length 초과 시 undefind가 출력되는 것을 방지
         setIsTypingPaused(true);
         return;
