@@ -111,7 +111,7 @@ const FileUpload: React.FC = () => {
               variant="contained"
               onClick={handlePostFile}
             >
-              전송
+              Send
             </Button>
           </ButtonWrapper>
 
