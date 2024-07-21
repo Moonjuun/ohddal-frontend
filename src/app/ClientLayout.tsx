@@ -1,6 +1,6 @@
 'use client';
 import React, { Suspense, useEffect, useState } from 'react';
-import { PaletteMode, Grid } from '@mui/material';
+import { PaletteMode, Grid, Container } from '@mui/material';
 import AppAppBar from '@/common/AppAppBar';
 import FullAppbar from '@/common/FullAppbar';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -49,9 +49,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           toggleColorLight={toggleColorLight}
           toggleColorDark={toggleColorDark}
         />
-        <Grid container sx={{ mt: 3 }}>
-          {children}
-        </Grid>
+        <Grid container>{children}</Grid>
       </Box>
       <Footer2 />
     </ThemeProvider>

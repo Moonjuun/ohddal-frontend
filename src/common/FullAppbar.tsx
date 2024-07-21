@@ -24,7 +24,7 @@ interface AppAppBarProps {
   toggleColorDark: () => void;
 }
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Find', 'Board', 'community'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }: AppAppBarProps) {
