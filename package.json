@@ -10,10 +10,10 @@
     "local": "npm run build && npm run start"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@emotion/react": "11.13.0",
+    "@emotion/styled": "11.13.0",
     "@mui/icons-material": "^5.15.19",
-    "@mui/material": "^5.15.19",
+    "@mui/material": "5.16.4",
     "@types/canvas-confetti": "1.6.4",
     "@types/react-copy-to-clipboard": "5.0.7",
     "axios": "1.7.2",
