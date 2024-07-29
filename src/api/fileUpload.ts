@@ -16,7 +16,7 @@ export const postFile = async (file: File | null): Promise<PostFileResponse> => 
   formData.append('file', file);
 
   try {
-    const response = await axios.post(`https://wiwi-api.com/postFile`, formData, {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/postFile`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
