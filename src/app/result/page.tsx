@@ -7,7 +7,7 @@ import CoverFlowContainer from './CoverFlow';
 import Image from 'next/image';
 
 import styled from 'styled-components';
-import Divider from '@/common/Divider';
+import Divider from '@/components/common/Divider';
 
 //icon
 import AutoHeightFileImage from '@/components/AutoHeightFileImage';

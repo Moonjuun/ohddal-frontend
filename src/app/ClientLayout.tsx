@@ -1,12 +1,12 @@
 'use client';
 import React, { Suspense, useEffect, useState } from 'react';
 import { PaletteMode, Grid, Container } from '@mui/material';
-import AppAppBar from '@/common/AppAppBar';
-import FullAppbar from '@/common/FullAppbar';
+import AppAppBar from '@/components/common/AppAppBar';
+import FullAppbar from '@/components/common/FullAppbar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Footer2 from '@/common/Footer2';
+import Footer2 from '@/components/common/Footer2';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [mode, setMode] = useState<PaletteMode>('light');

@@ -12,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import AutoHeightFileImage from '@/components/AutoHeightFileImage';
 import styles from 'styled-components';
 import { useRouter } from 'next/navigation';
-import Loading from '@/common/Loading';
+import Loading from '@/components/common/Loading';
 
 // store
 import useResultStore, { ResultData } from '@/store/useResultStore';
