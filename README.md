@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# WiWi
 
-## Getting Started
+> Who is? What is?
 
-First, run the development server:
+<div align="center">
+<img src="https://github.com/user-attachments/assets/4bde3342-dbaa-4347-8b0c-7fff169de090" width="49%">
+</div>
+
+## 🤔 Feature
+
+- [x] **Easy**: 사용자 경험을 최우선으로 고려한 깔끔하고 직관적인 UI/UX 디자인.
+- [x] **Detect**: 업로드된 사진을 인식, 관련 정보 제공
+- [x] **Simple**: 심플하고 직관적인 인터페이스로 분석 결과를 사용자에게 제공
+
+## 🛠 Tech Stack
+
+### Frontend
+`React`, `Next.JS 14`, `BootStrap`, `Recharts`, `styled-components`, `Responsive Web`, `Google Cloud`
+
+## Site
+
+https://wi-wi.io
+
+## Directory
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+├── public
+├── src
+│   └── api # 서버 통신 함수
+├── app # 페이지 관련
+│   ├── 
+│   ├── api 
+│   ├── _app.js
+│   └── index.js
+├── components # 컴포넌트
+├── effect # 효과
+├── hooks # 리액트 hook
+├── libs # 유틸 함수
+├── store # 상태관리
+├── 
+│
+└── ....etc
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
