@@ -15,7 +15,7 @@
 ## 🛠 Tech Stack
 
 ### Frontend
-`React`, `Next.JS 14`, `BootStrap`, `Recharts`, `styled-components`, `Responsive Web`, `Google Cloud`
+`React`, `Next.JS 14`, `Zustand`, `framer-motion`, `Recharts`, `styled-components`, `Responsive Web`, `Google Cloud`
 
 ## Site
 
