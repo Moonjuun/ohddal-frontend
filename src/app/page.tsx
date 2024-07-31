@@ -86,7 +86,7 @@ export default function Home() {
       </Box>
       <MarqueeComponent />
 
-      <Box
+      {/* <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -97,7 +97,7 @@ export default function Home() {
         }}
       >
         <Headshot />
-      </Box>
+      </Box> */}
 
       <Box
         sx={{
