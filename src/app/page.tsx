@@ -13,11 +13,12 @@ import {
   tooltipClasses,
 } from '@mui/material';
 import Find from './find/page';
-import MarqueeComponent from './intro/marquee';
+import MarqueeComponent from '../components/intro/marquee';
 import Image from 'next/image';
 import styled from 'styled-components';
 import MoodIcon from '@mui/icons-material/Mood';
 import { useRouter } from 'next/navigation';
+import Headshot from '@/components/intro/Headshot';
 
 export default function Home() {
   const theme = useTheme();
