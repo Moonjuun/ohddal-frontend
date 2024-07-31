@@ -13,12 +13,14 @@ import {
   tooltipClasses,
 } from '@mui/material';
 import Find from './find/page';
-import MarqueeComponent from '../components/intro/marquee';
 import Image from 'next/image';
 import styled from 'styled-components';
 import MoodIcon from '@mui/icons-material/Mood';
 import { useRouter } from 'next/navigation';
+
+// components
 import Headshot from '@/components/intro/Headshot';
+import MarqueeComponent from '@/components/intro/marquee';
 
 export default function Home() {
   const theme = useTheme();
@@ -83,6 +85,19 @@ export default function Home() {
         </Typography>
       </Box>
       <MarqueeComponent />
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          padding: isMobile ? '20px' : '0',
+        }}
+      >
+        <Headshot />
+      </Box>
 
       <Box
         sx={{
