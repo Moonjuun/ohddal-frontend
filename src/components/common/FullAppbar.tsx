@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRouter } from 'next/navigation';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { PaletteMode } from '@mui/material';
@@ -17,6 +18,7 @@ import Image from 'next/image';
 
 import ToggleColorModeFullAppbar from './ToggleColorModeFullAppbar';
 import SettingsDrawer from './SettingsDrawer';
+
 interface AppAppBarProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
@@ -24,10 +26,11 @@ interface AppAppBarProps {
   toggleColorDark: () => void;
 }
 
-const pages = ['Find', 'Board', 'community'];
+const pages = ['Find', 'Board', 'Community'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }: AppAppBarProps) {
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -44,6 +47,11 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handlePageNavigation = (page: string) => {
+    handleCloseNavMenu();
+    router.push(`/${page.toLowerCase()}`);
   };
 
   return (
@@ -107,7 +115,7 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handlePageNavigation(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -120,7 +128,7 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
             height={50}
             priority
             onClick={() => {
-              window.location.href = '/';
+              router.push('/');
             }}
             style={{ marginRight: '20px', marginLeft: '30px' }}
           />
@@ -146,7 +154,7 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handlePageNavigation(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -196,4 +204,5 @@ function FullAppbar({ mode, toggleColorMode, toggleColorLight, toggleColorDark }
     </AppBar>
   );
 }
+
 export default FullAppbar;
