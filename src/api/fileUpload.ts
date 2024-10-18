@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { commonApi } from '@/libs/api';
 
 interface PostFileResponse {
   bestGuess: any[];
@@ -16,12 +16,13 @@ export const postFile = async (file: File | null): Promise<PostFileResponse> => 
   formData.append('file', file);
 
   try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/postFile`, formData, {
+    // 공통 API 호출 함수 사용
+    const response = await commonApi.post('/postFile', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return response.data;
+    return response.data; // response.data로 수정
   } catch (error) {
     console.error('Error uploading file:', error);
     throw error;
