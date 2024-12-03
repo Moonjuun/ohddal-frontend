@@ -2,9 +2,7 @@
 
 > Who is? What is?
 
-<div align="center">
-<img src="https://github.com/user-attachments/assets/4bde3342-dbaa-4347-8b0c-7fff169de090" width="49%">
-</div>
+https://github.com/user-attachments/assets/4a9e1ada-cb84-435c-9f64-a1941be939e4
 
 ## 🤔 Feature
 
